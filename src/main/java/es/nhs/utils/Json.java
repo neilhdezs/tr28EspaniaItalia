@@ -18,18 +18,18 @@ public class Json
         return Json.mapper;
     }
 
-    private static ObjectMapper createJson()
-    {
-        return new ObjectMapper();
-    }
-
 //    private static ObjectMapper createJson()
 //    {
-//        final ObjectMapper mapper = new ObjectMapper();
-//        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, true);
-//        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-//        return mapper;
+//        return new ObjectMapper();
 //    }
+
+    private static ObjectMapper createJson()
+    {
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, true);
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+        return mapper;
+    }
 
 }

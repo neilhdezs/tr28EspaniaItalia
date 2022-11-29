@@ -36,6 +36,8 @@ public class Event
     private Goalkeeper goalkeeper;
     private Interception interception;
     private Pass pass;
+    private Shot shot;
+
 
 
 }
