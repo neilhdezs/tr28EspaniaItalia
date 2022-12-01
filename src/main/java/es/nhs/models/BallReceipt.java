@@ -5,6 +5,7 @@ public class BallReceipt
 
     private int id; // id
     private String name; // name for the attribute option the outcome of the ball receipt
+    private OutCome outcome;
 
     public BallReceipt()
     {
@@ -29,6 +30,16 @@ public class BallReceipt
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public OutCome getOutcome()
+    {
+        return outcome;
+    }
+
+    public void setOutcome(OutCome outcome)
+    {
+        this.outcome = outcome;
     }
 
     @Override

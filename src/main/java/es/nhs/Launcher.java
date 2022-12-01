@@ -18,15 +18,20 @@ public class Launcher
 
     public static void main(String[] args)
     {
+
+        int i = 0;
+
         ObjectMapper mapper = Json.mapper();
 
         try
         {
-            List<Event> cocheList1 = mapper.readValue(Paths.get("src/main/resources/3795220.json").toFile(), new TypeReference<List<Event>>(){});
+            List<Event> listEvent = mapper.readValue(Paths.get("src/main/resources/3795220.json").toFile(), new TypeReference<List<Event>>(){});
 
-            for (Event coche1: cocheList1)
+            for (Event event: listEvent)
             {
-                System.out.println(coche1.toString());
+                i++;
+                System.out.println(i + event.toString());
+                System.out.println();
             }
 
         } catch (IOException exception)

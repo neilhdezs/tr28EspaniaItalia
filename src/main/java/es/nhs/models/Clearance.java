@@ -4,10 +4,34 @@ public class Clearance
 {
     private Boolean aerial_won;
     private BodyPart body_part;
+    private BodyPart clearance;
+    private Boolean right_foot;
+    private Boolean left_foot;
+    private Boolean head;
 
     public Clearance()
     {
 
+    }
+
+    public Boolean getLeft_foot()
+    {
+        return left_foot;
+    }
+
+    public void setLeft_foot(Boolean left_foot)
+    {
+        this.left_foot = left_foot;
+    }
+
+    public Boolean getHead()
+    {
+        return head;
+    }
+
+    public void setHead(Boolean head)
+    {
+        this.head = head;
     }
 
     public Boolean getAerial_won()
@@ -28,6 +52,26 @@ public class Clearance
     public void setBody_part(BodyPart body_part)
     {
         this.body_part = body_part;
+    }
+
+    public BodyPart getClearance()
+    {
+        return clearance;
+    }
+
+    public void setClearance(BodyPart clearance)
+    {
+        this.clearance = clearance;
+    }
+
+    public Boolean getRight_foot()
+    {
+        return right_foot;
+    }
+
+    public void setRight_foot(Boolean right_foot)
+    {
+        this.right_foot = right_foot;
     }
 
     @Override

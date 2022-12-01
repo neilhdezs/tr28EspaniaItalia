@@ -26,11 +26,56 @@ public class Pass
     private Type type;
     private OutCome outcome;
     private Technique technique;
+    private Boolean through_ball;
+    private Boolean outswinging;
+    private Boolean aerial_won;
+    private Boolean no_touch;
+    private Boolean inswinging;
 
 
     public Pass()
     {
 
+    }
+
+    public Boolean getInswinging()
+    {
+        return inswinging;
+    }
+
+    public void setInswinging(Boolean inswinging)
+    {
+        this.inswinging = inswinging;
+    }
+
+    public Boolean getNo_touch()
+    {
+        return no_touch;
+    }
+
+    public void setNo_touch(Boolean no_touch)
+    {
+        this.no_touch = no_touch;
+    }
+
+    public Boolean getAerial_won()
+    {
+        return aerial_won;
+    }
+
+    public void setAerial_won(Boolean aerial_won)
+    {
+        this.aerial_won = aerial_won;
+    }
+
+    public Boolean getOutswinging()
+    {
+        return outswinging;
+    }
+
+    public void setOutswinging(Boolean outswinging)
+    {
+        this.outswinging = outswinging;
     }
 
     public Recipient getRecipient()
@@ -213,5 +258,15 @@ public class Pass
     public void setTechnique(Technique technique)
     {
         this.technique = technique;
+    }
+
+    public Boolean getThrough_ball()
+    {
+        return through_ball;
+    }
+
+    public void setThrough_ball(Boolean through_ball)
+    {
+        this.through_ball = through_ball;
     }
 }

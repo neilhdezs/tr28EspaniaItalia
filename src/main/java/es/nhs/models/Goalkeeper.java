@@ -1,5 +1,7 @@
 package es.nhs.models;
 
+import java.util.List;
+
 public class Goalkeeper
 {
 
@@ -8,10 +10,21 @@ public class Goalkeeper
     private BodyPart body_part;
     private Type type;
     private OutCome outcome;
+    private List<Integer> end_location;
 
     public Goalkeeper()
     {
 
+    }
+
+    public List<Integer> getEnd_location()
+    {
+        return end_location;
+    }
+
+    public void setEnd_location(List<Integer> end_location)
+    {
+        this.end_location = end_location;
     }
 
     public Position getPosition()

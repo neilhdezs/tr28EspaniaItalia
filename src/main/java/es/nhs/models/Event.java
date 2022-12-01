@@ -1,6 +1,11 @@
 package es.nhs.models;
 
+import es.nhs.utils.Utils;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +15,8 @@ public class Event
     private String id;
     private int index;
     private int period;
-    private LocalDateTime timestamp;
+    private String timestamp;
+    private Date timestampDate;
     private int minute;
     private int second;
     private Type type;
@@ -38,6 +44,46 @@ public class Event
     private Interception interception;
     private Pass pass;
     private Shot shot;
+    private Boolean counterpress;
+    private FoulWon foul_won;
+    private FoulCommited foul_committed;
+    private Block block;
+    private Substitution substitution;
+
+    public Event()
+    {
+
+    }
+
+    public Substitution getSubstitution()
+    {
+        return substitution;
+    }
+
+    public void setSubstitution(Substitution substitution)
+    {
+        this.substitution = substitution;
+    }
+
+    public Block getBlock()
+    {
+        return block;
+    }
+
+    public void setBlock(Block block)
+    {
+        this.block = block;
+    }
+
+    public FoulCommited getFoul_committed()
+    {
+        return foul_committed;
+    }
+
+    public void setFoul_committed(FoulCommited foul_committed)
+    {
+        this.foul_committed = foul_committed;
+    }
 
     public String getId()
     {
@@ -69,13 +115,15 @@ public class Event
         this.period = period;
     }
 
-    public LocalDateTime getTimestamp()
+    public String getTimestamp()
     {
         return this.timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp)
+    public void setTimestamp(String timestamp)
     {
+        Utils utils = new Utils();
+        this.timestampDate = utils.parsearHorasDate(timestamp);
         this.timestamp = timestamp;
     }
 
@@ -349,6 +397,36 @@ public class Event
         this.shot = shot;
     }
 
+    public Date getTimestampDate()
+    {
+        return timestampDate;
+    }
+
+    public void setTimestampDate(Date timestampDate)
+    {
+        this.timestampDate = timestampDate;
+    }
+
+    public Boolean getCounterpress()
+    {
+        return counterpress;
+    }
+
+    public void setCounterpress(Boolean counterpress)
+    {
+        this.counterpress = counterpress;
+    }
+
+    public FoulWon getFoul_won()
+    {
+        return foul_won;
+    }
+
+    public void setFoul_won(FoulWon foul_won)
+    {
+        this.foul_won = foul_won;
+    }
+
     @Override
     public String toString()
     {
@@ -386,4 +464,5 @@ public class Event
                 ", shot=" + shot +
                 '}';
     }
+
 }

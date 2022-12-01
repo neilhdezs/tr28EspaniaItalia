@@ -5,6 +5,8 @@ public class Lineup
 
     private Player player;
     private Position position;
+    private int jersey_number;
+
 
     public Lineup()
     {
@@ -29,6 +31,16 @@ public class Lineup
     public void setPosition(Position position)
     {
         this.position = position;
+    }
+
+    public int getJersey_number()
+    {
+        return jersey_number;
+    }
+
+    public void setJersey_number(int jersey_number)
+    {
+        this.jersey_number = jersey_number;
     }
 
     @Override
