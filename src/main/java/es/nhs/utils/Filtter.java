@@ -1,8 +1,10 @@
 package es.nhs.utils;
 
 import es.nhs.models.events.Event;
+import es.nhs.models.resultado.Goleador;
+import es.nhs.models.resultado.Referencia;
+import es.nhs.models.resultado.Resultado;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +18,12 @@ public class Filtter
 {
 
     List<Event> eventList;
+    Resultado resultado;
 
     public Filtter(List<Event> eventList)
     {
         this.eventList = eventList;
+        this.resultado = new Resultado();
     }
 
     public List<Event> getEventList()
@@ -32,6 +36,12 @@ public class Filtter
         this.eventList = eventList;
     }
 
+    public void filtradoCompleto()
+    {
+        goleadores();
+        referenica();
+    }
+
     public void goleadores()
     {
 
@@ -41,11 +51,13 @@ public class Filtter
             {
                 if (this.eventList.get(i).getShot().getOutcome().getId() == 97 && this.eventList.get(i+1).getGoalkeeper().getType().getId() == 26)
                 {
-                    System.out.println(
-                            "Nombre del jugador que ha marcado: " + this.eventList.get(i).getPlayer().getName() + " - Equipo al que pertenece -> " +
-                            this.eventList.get(i).getTeam().getName() + " - minuto en el que se ha marcado el gol -> " + this.eventList.get(i).getMinute() +
-                            ":" + this.eventList.get(i).getSecond()
-                    );
+
+                    this.resultado.getGoleador().add(new Goleador(
+                            this.eventList.get(i).getTeam().getName(),
+                            this.eventList.get(i).getPlayer().getName(),
+                            this.eventList.get(i).getMinute(),
+                            this.eventList.get(i).getSecond()
+                    ));
                 }
             }
         }
@@ -54,21 +66,37 @@ public class Filtter
     public void referenica()
     {
         // String: Jugador que recibe el pase, Integer: Numero de pases que ha recibido
-        Map<String, Integer> numeroPases = new HashMap<>();
+        Map<String, Integer> numeroPasesSpain = new HashMap<>();
+        Map<String, Integer> numeroPasesItaly = new HashMap<>();
 
-        for (Event event : this.eventList)
+
+        for (int i = 0; i<this.eventList.size(); i++)
         {
-            if (event.getPass() != null)
+            if (this.eventList.get(i).getPass() != null)
             {
-                if (event.getPass().getRecipient() != null)
+                if (this.eventList.get(i).getPass().getRecipient() != null)
                 {
-                    if (numeroPases.containsKey(event.getPass().getRecipient().getName()))
+                    if (this.eventList.get(i+i).getTeam().getName().equals("Spain"))
                     {
-                        numeroPases.put(event.getPass().getRecipient().getName(), numeroPases.get(event.getPass().getRecipient().getName()) + 1);
+                        if (numeroPasesSpain.containsKey(this.eventList.get(i).getPass().getRecipient().getName()))
+                        {
+                            numeroPasesSpain.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesSpain.get(this.eventList.get(i).getPass().getRecipient().getName() + 1));
+                        }
+                        else
+                        {
+                            numeroPasesSpain.put(this.eventList.get(i).getPass().getRecipient().getName(), 1);
+                        }
                     }
                     else
                     {
-                        numeroPases.put(event.getPass().getRecipient().getName(), 1);
+                        if (numeroPasesItaly.containsKey(this.eventList.get(i).getPass().getRecipient().getName()))
+                        {
+                            numeroPasesItaly.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesItaly.get(this.eventList.get(i).getPass().getRecipient().getName() + 1));
+                        }
+                        else
+                        {
+                            numeroPasesItaly.put(this.eventList.get(i).getPass().getRecipient().getName(), 1);
+                        }
                     }
                 }
             }
@@ -77,16 +105,30 @@ public class Filtter
         String jugadorMaxPass = "";
         int numPassOfJugador = -1;
 
-        for (Map.Entry<String,Integer> jugadorPass:numeroPases.entrySet())
+        for (Map.Entry<String,Integer> jugadorPassSpain:numeroPasesSpain.entrySet())
         {
-            if (jugadorPass.getValue() > numPassOfJugador)
+            if (jugadorPassSpain.getValue() > numPassOfJugador)
             {
-                numPassOfJugador = jugadorPass.getValue();
-                jugadorMaxPass = jugadorPass.getKey();
+                numPassOfJugador = jugadorPassSpain.getValue();
+                jugadorMaxPass = jugadorPassSpain.getKey();
             }
         }
 
-        System.out.println("El Jugador con el mayor número de pases recibidos del partido ha sido -> " + jugadorMaxPass + " Con " + numPassOfJugador + " Pases.");
+        this.resultado.getReferencia().add(new Referencia("Spain", jugadorMaxPass, numPassOfJugador));
+
+        jugadorMaxPass = "";
+        numPassOfJugador = -1;
+
+        for (Map.Entry<String,Integer> jugadorPassItaly:numeroPasesItaly.entrySet())
+        {
+            if (jugadorPassItaly.getValue() > numPassOfJugador)
+            {
+                numPassOfJugador = jugadorPassItaly.getValue();
+                jugadorMaxPass = jugadorPassItaly.getKey();
+            }
+        }
+
+        this.resultado.getReferencia().add(new Referencia("Italy", jugadorMaxPass, numPassOfJugador));
 
     }
 
