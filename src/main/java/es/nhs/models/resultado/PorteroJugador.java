@@ -19,6 +19,13 @@ public class PorteroJugador
         this.pases = -1;
     }
 
+    public PorteroJugador(String equipo, String nombre, int pases)
+    {
+        this.equipo = equipo;
+        this.nombre = nombre;
+        this.pases = pases;
+    }
+
     public String getEquipo()
     {
         return equipo;
@@ -47,5 +54,15 @@ public class PorteroJugador
     public void setPases(int pases)
     {
         this.pases = pases;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "PorteroJugador{" +
+                "equipo='" + equipo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", pases=" + pases +
+                '}';
     }
 }

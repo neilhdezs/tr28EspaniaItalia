@@ -2,6 +2,7 @@ package es.nhs.utils;
 
 import es.nhs.models.events.Event;
 import es.nhs.models.resultado.Goleador;
+import es.nhs.models.resultado.PorteroJugador;
 import es.nhs.models.resultado.Referencia;
 import es.nhs.models.resultado.Resultado;
 
@@ -40,6 +41,8 @@ public class Filtter
     {
         goleadores();
         referenica();
+        porteroJugador();
+        System.out.println(this.resultado.toString());
     }
 
     public void goleadores()
@@ -76,11 +79,11 @@ public class Filtter
             {
                 if (this.eventList.get(i).getPass().getRecipient() != null)
                 {
-                    if (this.eventList.get(i+i).getTeam().getName().equals("Spain"))
+                    if (this.eventList.get(i+1).getPossession_team().getName().equals("Spain"))
                     {
                         if (numeroPasesSpain.containsKey(this.eventList.get(i).getPass().getRecipient().getName()))
                         {
-                            numeroPasesSpain.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesSpain.get(this.eventList.get(i).getPass().getRecipient().getName() + 1));
+                            numeroPasesSpain.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesSpain.get(this.eventList.get(i).getPass().getRecipient().getName()) + 1);
                         }
                         else
                         {
@@ -91,7 +94,7 @@ public class Filtter
                     {
                         if (numeroPasesItaly.containsKey(this.eventList.get(i).getPass().getRecipient().getName()))
                         {
-                            numeroPasesItaly.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesItaly.get(this.eventList.get(i).getPass().getRecipient().getName() + 1));
+                            numeroPasesItaly.put(this.eventList.get(i).getPass().getRecipient().getName(), numeroPasesItaly.get(this.eventList.get(i).getPass().getRecipient().getName()) + 1);
                         }
                         else
                         {
@@ -135,51 +138,71 @@ public class Filtter
     public void porteroJugador()
     {
 
-    }
+        int passOfSpainToGoalPeeker = 0;
+        int passOfItalyToGoalPeeker = 0;
+        String goalKeeperSpain = "";
+        String goalKeeperItaly = "";
 
-    public void luchador()
-    {
-
-        int duelWonSpain = 0;
-        int duelWonItaly = 0;
-        int duelTotal = 0;
-
-        String ganador;
-
-        for (Event event : this.eventList)
+        for (int i = 0; i<this.eventList.size(); i++)
         {
-            if (event.getType().getId() == 4)
+            if (this.eventList.get(i).getPass() != null)
             {
-                duelTotal++;
-
-                if (event.getDuel().getOutcome() != null)
+                if (this.eventList.get(i).getPass().getRecipient() != null)
                 {
-                    if (event.getDuel().getOutcome().getId() == 4 && event.getTeam().getName().equals("Spain"))
+                    if (this.eventList.get(i + 1).getPosition().getId() == 1)
                     {
-                        duelWonSpain++;
-                    } else if (event.getDuel().getOutcome().getId() == 4 && event.getTeam().getName().equals("Italy"))
-                    {
-                        duelWonItaly++;
+
+                        if(this.eventList.get(i + 1).getTeam().getName().equals("Spain"))
+                        {
+                            passOfSpainToGoalPeeker++;
+                        }
+
+
+                        if(this.eventList.get(i + 1).getTeam().getName().equals("Italy"))
+                        {
+                            passOfItalyToGoalPeeker++;
+                        }
                     }
                 }
             }
         }
 
-        if (duelWonSpain > duelWonItaly)
+        int i = 0;
+
+        while (goalKeeperSpain.equals("") || goalKeeperItaly.equals(""))
         {
-            ganador = "Spain";
+
+            if (eventList.get(i).getTeam().getName().equals("Spain"))
+            {
+                goalKeeperSpain = eventList.get(i).getTactics().getLineup().get(0).getPlayer().getName();
+            }
+
+            if (eventList.get(i).getTeam().getName().equals("Italy"))
+            {
+                goalKeeperItaly = eventList.get(i).getTactics().getLineup().get(0).getPlayer().getName();
+            }
+
+            i++;
         }
-        else if (duelWonSpain < duelWonItaly)
+
+        if (passOfSpainToGoalPeeker>passOfItalyToGoalPeeker)
         {
-            ganador = "Italy";
+            this.resultado.setPortero_jugador(new PorteroJugador("Spain", goalKeeperSpain, passOfSpainToGoalPeeker));
         }
         else
         {
-            ganador = "empate";
+            this.resultado.setPortero_jugador(new PorteroJugador("Italy", goalKeeperItaly, passOfItalyToGoalPeeker));
         }
+    }
 
-        System.out.println("El Equipo que mayor porcentaje de duelos ha ganado es: " + ganador + " total: " + duelTotal + " Spain: " + duelWonSpain + " Italy: " + duelWonItaly);
+    public void luchador()
+    {
 
+        // String: Jugador que recibe gana el duelo, Integer: Numero de duelos ganados
+        Map<String, Integer> numeroDuelosSpain = new HashMap<>();
+        Map<String, Integer> numeroDuelosItaly = new HashMap<>();
+
+        // Tener en cuenta que si un equipo ha perdido el duelo, lo ha ganado el otro equipo
     }
 
     public void porcentajePosesion()

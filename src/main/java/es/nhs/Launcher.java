@@ -30,9 +30,7 @@ public class Launcher
 
             filtter = new Filtter(listEvent);
 
-            filtter.goleadores();
-            filtter.luchador();
-            filtter.referenica();
+            filtter.filtradoCompleto();
 
         } catch (IOException exception)
         {

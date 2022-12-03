@@ -74,4 +74,16 @@ public class Resultado
     {
         this.porcentajes_posesion = porcentajes_posesion;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Resultado{" +
+                "\ngoleador=" + goleador +
+                "\n, referencia=" + referencia +
+                "\n, portero_jugador=" + portero_jugador +
+                "\n, luchador=" + luchador +
+                "\n, porcentajes_posesion=" + porcentajes_posesion +
+                '}';
+    }
 }
