@@ -1,17 +1,16 @@
-package es.nhs.models;
+package es.nhs.models.events.foul_commited;
 
 /**
  * @author Neil Hdez
  * @version 1.0.0
  * @since 01/12/2022
  */
-public class Replacement
+public class Card
 {
-
     private int id; // id
     private String name;
 
-    Replacement()
+    Card()
     {
 
     }

@@ -1,4 +1,6 @@
-package es.nhs.models;
+package es.nhs.models.events;
+
+import es.nhs.models.events.tactics.Lineup;
 
 import java.util.List;
 

@@ -1,4 +1,7 @@
-package es.nhs.models;
+package es.nhs.models.events.shot;
+
+import es.nhs.models.Player;
+import es.nhs.models.Position;
 
 import java.util.List;
 

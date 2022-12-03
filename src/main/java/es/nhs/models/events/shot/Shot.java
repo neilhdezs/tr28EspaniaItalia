@@ -1,4 +1,6 @@
-package es.nhs.models;
+package es.nhs.models.events.shot;
+
+import es.nhs.models.*;
 
 import java.util.List;
 import java.util.UUID;

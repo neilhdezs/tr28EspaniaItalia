@@ -1,6 +1,7 @@
-package es.nhs.models;
+package es.nhs.models.events.pass;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import es.nhs.models.*;
 
 import java.util.List;
 import java.util.UUID;

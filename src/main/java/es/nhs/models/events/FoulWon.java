@@ -1,4 +1,4 @@
-package es.nhs.models;
+package es.nhs.models.events;
 
 /**
  * @author Neil Hdez

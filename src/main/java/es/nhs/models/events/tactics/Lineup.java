@@ -1,4 +1,7 @@
-package es.nhs.models;
+package es.nhs.models.events.tactics;
+
+import es.nhs.models.Player;
+import es.nhs.models.Position;
 
 public class Lineup
 {

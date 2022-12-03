@@ -1,4 +1,6 @@
-package es.nhs.models;
+package es.nhs.models.events;
+
+import es.nhs.models.BodyPart;
 
 public class Clearance
 {

@@ -1,4 +1,4 @@
-package es.nhs.models;
+package es.nhs.models.events.foul_commited;
 
 /**
  * @author Neil Hdez

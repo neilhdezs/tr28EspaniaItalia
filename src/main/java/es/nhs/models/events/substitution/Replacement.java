@@ -1,16 +1,17 @@
-package es.nhs.models;
+package es.nhs.models.events.substitution;
 
 /**
  * @author Neil Hdez
  * @version 1.0.0
  * @since 01/12/2022
  */
-public class Card
+public class Replacement
 {
+
     private int id; // id
     private String name;
 
-    Card()
+    Replacement()
     {
 
     }

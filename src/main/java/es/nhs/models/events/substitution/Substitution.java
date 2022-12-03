@@ -1,4 +1,6 @@
-package es.nhs.models;
+package es.nhs.models.events.substitution;
+
+import es.nhs.models.OutCome;
 
 /**
  * @author Neil Hdez

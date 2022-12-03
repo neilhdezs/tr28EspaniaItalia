@@ -1,4 +1,7 @@
-package es.nhs.models;
+package es.nhs.models.events;
+
+import es.nhs.models.OutCome;
+import es.nhs.models.Type;
 
 public class Duel
 {

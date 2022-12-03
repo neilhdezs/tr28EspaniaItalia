@@ -1,10 +1,12 @@
-package es.nhs.models;
+package es.nhs.models.events;
 
+import es.nhs.models.*;
+import es.nhs.models.events.foul_commited.FoulCommited;
+import es.nhs.models.events.pass.Pass;
+import es.nhs.models.events.shot.Shot;
+import es.nhs.models.events.substitution.Substitution;
 import es.nhs.utils.Utils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;

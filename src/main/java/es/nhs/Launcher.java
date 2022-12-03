@@ -2,7 +2,8 @@ package es.nhs;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import es.nhs.models.Event;
+import es.nhs.models.events.Event;
+import es.nhs.utils.Filtter;
 import es.nhs.utils.Json;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ public class Launcher
     public static void main(String[] args)
     {
 
-        int i = 0;
+        Filtter filtter = null;
 
         ObjectMapper mapper = Json.mapper();
 
@@ -27,17 +28,18 @@ public class Launcher
         {
             List<Event> listEvent = mapper.readValue(Paths.get("src/main/resources/3795220.json").toFile(), new TypeReference<List<Event>>(){});
 
-            for (Event event: listEvent)
-            {
-                i++;
-                System.out.println(i + event.toString());
-                System.out.println();
-            }
+            filtter = new Filtter(listEvent);
+
+            filtter.goleadores();
+            filtter.luchador();
+            filtter.referenica();
 
         } catch (IOException exception)
         {
             exception.printStackTrace();
         }
+
+
 
 
     }
