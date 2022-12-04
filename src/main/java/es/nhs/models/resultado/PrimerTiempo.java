@@ -7,8 +7,14 @@ package es.nhs.models.resultado;
  */
 public class PrimerTiempo
 {
-    int spain;
-    int italy;
+    double spain;
+    double italy;
+
+    public PrimerTiempo(double spain, double italy)
+    {
+        this.spain = spain;
+        this.italy = italy;
+    }
 
     public PrimerTiempo()
     {
@@ -16,23 +22,32 @@ public class PrimerTiempo
         this.italy = -1;
     }
 
-    public int getSpain()
+    public double getSpain()
     {
         return spain;
     }
 
-    public void setSpain(int spain)
+    public void setSpain(double spain)
     {
         this.spain = spain;
     }
 
-    public int getItaly()
+    public double getItaly()
     {
         return italy;
     }
 
-    public void setItaly(int italy)
+    public void setItaly(double italy)
     {
         this.italy = italy;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "PrimerTiempo{" +
+                "spain=" + spain +
+                ", italy=" + italy +
+                '}';
     }
 }

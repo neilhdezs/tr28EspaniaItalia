@@ -1,10 +1,7 @@
 package es.nhs.utils;
 
 import es.nhs.models.events.Event;
-import es.nhs.models.resultado.Goleador;
-import es.nhs.models.resultado.PorteroJugador;
-import es.nhs.models.resultado.Referencia;
-import es.nhs.models.resultado.Resultado;
+import es.nhs.models.resultado.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +39,8 @@ public class Filtter
         goleadores();
         referenica();
         porteroJugador();
+        luchador();
+        porcentajePosesion();
         System.out.println(this.resultado.toString());
     }
 
@@ -201,12 +200,118 @@ public class Filtter
         // String: Jugador que recibe gana el duelo, Integer: Numero de duelos ganados
         Map<String, Integer> numeroDuelosSpain = new HashMap<>();
         Map<String, Integer> numeroDuelosItaly = new HashMap<>();
+        int duelosGanadosSpain = 0;
+        int duelosGanadosItaly = 0;
+        int duelosTotales = 0;
 
-        // Tener en cuenta que si un equipo ha perdido el duelo, lo ha ganado el otro equipo
+        for (Event event:this.eventList)
+        {
+            if (event.getDuel() != null && event.getDuel().getOutcome() != null)
+            {
+                if (event.getDuel().getOutcome().getId() == 4)
+                {
+
+                    duelosTotales++;
+
+                    if (event.getPossession_team().getName().equals("Spain"))
+                    {
+
+                        duelosGanadosSpain++;
+
+                        if (numeroDuelosSpain.containsKey(event.getPlayer().getName()))
+                        {
+                            numeroDuelosSpain.put(event.getPlayer().getName(), numeroDuelosSpain.get(event.getPlayer().getName())+ 1);
+                        }
+                        else
+                        {
+                            numeroDuelosSpain.put(event.getPlayer().getName(), 1);
+                        }
+                    } else if (event.getPossession_team().getName().equals("Italy"))
+                    {
+
+                        duelosGanadosItaly++;
+
+                        if (numeroDuelosItaly.containsKey(event.getPlayer().getName()))
+                        {
+                            numeroDuelosItaly.put(event.getPlayer().getName(), numeroDuelosItaly.get(event.getPlayer().getName())+ 1);
+                        }
+                        else
+                        {
+                            numeroDuelosItaly.put(event.getPlayer().getName(), 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println(duelosTotales);
+        System.out.println(duelosGanadosSpain);
+        System.out.println(duelosGanadosItaly);
+
+        for (Map.Entry<String, Integer> entry:numeroDuelosSpain.entrySet())
+        {
+            System.out.println(entry.getValue() + " -> Puntos " + entry.getKey() + " <- Jugador");
+        }
+
+        System.out.println("\n\nITALY");
+
+        for (Map.Entry<String, Integer> entry:numeroDuelosItaly.entrySet())
+        {
+            System.out.println(entry.getValue() + " -> Puntos " + entry.getKey() + " <- Jugador");
+        }
+
     }
 
     public void porcentajePosesion()
     {
+
+        double primerTiempoSpain = 0;
+        double segundoTiempoSpain = 0;
+        double primerTiempoItaly = 0;
+        double segundoTiempoItaly = 0;
+        double total = 0;
+
+        for (Event event:this.eventList)
+        {
+            if (event.getDuration() != null)
+            {
+
+                total = total + event.getDuration();
+
+                if (event.getPossession_team().getName().equals("Spain"))
+                {
+                    if (event.getPeriod() == 1)
+                    {
+                        primerTiempoSpain = primerTiempoSpain + event.getDuration();
+                    } else if (event.getPeriod() == 2)
+                    {
+                        segundoTiempoSpain = segundoTiempoSpain + event.getDuration();
+                    }
+                }
+
+                if (event.getPossession_team().getName().equals("Italy"))
+                {
+                    if (event.getPeriod() == 1)
+                    {
+                        primerTiempoItaly = primerTiempoItaly + event.getDuration();
+                    } else if (event.getPeriod() == 2)
+                    {
+                        segundoTiempoItaly = segundoTiempoItaly + event.getDuration();
+                    }
+                }
+            }
+        }
+
+        double porcentajeSpainPrimerTiempo = 100 / ((primerTiempoSpain + primerTiempoItaly) / primerTiempoSpain);
+        double porcentajeItalyPrimerTiempo = 100 / ((primerTiempoSpain + primerTiempoItaly) / primerTiempoItaly);
+        double porcentajeSpainSegundoTiempo = 100 / ((segundoTiempoSpain + segundoTiempoItaly) / segundoTiempoSpain);
+        double porcentajeItalySegundoTiempo = 100 / ((segundoTiempoSpain + segundoTiempoItaly) / segundoTiempoItaly);
+        double porcentajeSpainTotal = (porcentajeSpainPrimerTiempo + porcentajeSpainSegundoTiempo) / 2;
+        double porcentajeItalyTotal = (porcentajeItalyPrimerTiempo + porcentajeItalySegundoTiempo) / 2;
+
+        this.resultado.getPorcentajes_posesion().setPrimer_tiempo(new PrimerTiempo(porcentajeSpainPrimerTiempo, porcentajeItalyPrimerTiempo));
+        this.resultado.getPorcentajes_posesion().setSegundo_tiempo(new SegundoTiempo(porcentajeSpainSegundoTiempo, porcentajeItalySegundoTiempo));
+        this.resultado.getPorcentajes_posesion().setPartido_completo(new PartidoCompleto(porcentajeSpainTotal, porcentajeItalyTotal));
 
     }
 

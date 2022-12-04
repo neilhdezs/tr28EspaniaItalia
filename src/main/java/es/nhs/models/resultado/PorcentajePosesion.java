@@ -48,4 +48,14 @@ public class PorcentajePosesion
     {
         this.partido_completo = partido_completo;
     }
+
+    @Override
+    public String toString()
+    {
+        return "PorcentajePosesion{" +
+                "primer_tiempo=" + primer_tiempo +
+                ", segundo_tiempo=" + segundo_tiempo +
+                ", partido_completo=" + partido_completo +
+                '}';
+    }
 }
