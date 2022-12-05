@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="tr28" />
         <module name="Tr28" />
+        <module name="tr28EspaniaItalia" />
       </profile>
     </annotationProcessing>
   </component>

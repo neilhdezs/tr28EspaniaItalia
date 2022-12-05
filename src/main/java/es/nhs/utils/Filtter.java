@@ -1,8 +1,12 @@
 package es.nhs.utils;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import es.nhs.models.events.Event;
 import es.nhs.models.resultado.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,7 @@ public class Filtter
 
     List<Event> eventList;
     Resultado resultado;
+
 
     public Filtter(List<Event> eventList)
     {
@@ -34,13 +39,14 @@ public class Filtter
         this.eventList = eventList;
     }
 
-    public void filtradoCompleto()
+    public void filtradoCompleto() throws IOException
     {
         goleadores();
         referenica();
         porteroJugador();
         luchador();
         porcentajePosesion();
+        excribirResultadoJson();
         System.out.println(this.resultado.toString());
     }
 
@@ -213,7 +219,7 @@ public class Filtter
 
                     duelosTotales++;
 
-                    if (event.getPossession_team().getName().equals("Spain"))
+                    if (event.getTeam().getName().equals("Spain"))
                     {
 
                         duelosGanadosSpain++;
@@ -226,7 +232,7 @@ public class Filtter
                         {
                             numeroDuelosSpain.put(event.getPlayer().getName(), 1);
                         }
-                    } else if (event.getPossession_team().getName().equals("Italy"))
+                    } else if (event.getTeam().getName().equals("Italy"))
                     {
 
                         duelosGanadosItaly++;
@@ -313,6 +319,12 @@ public class Filtter
         this.resultado.getPorcentajes_posesion().setSegundo_tiempo(new SegundoTiempo(porcentajeSpainSegundoTiempo, porcentajeItalySegundoTiempo));
         this.resultado.getPorcentajes_posesion().setPartido_completo(new PartidoCompleto(porcentajeSpainTotal, porcentajeItalyTotal));
 
+    }
+
+    public void excribirResultadoJson() throws IOException
+    {
+        ObjectWriter writer = Json.mapper().writer(new DefaultPrettyPrinter());
+        writer.writeValue(new File("src/main/resources/result_out.json"), this.resultado);
     }
 
 }
