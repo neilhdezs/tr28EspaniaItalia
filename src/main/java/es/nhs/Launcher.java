@@ -15,7 +15,7 @@ import java.util.List;
 public class Launcher
 {
 
-    private static final Logger LOG = LogManager.getLogger(); // we create Logs
+    private static final Logger LOG = LogManager.getLogger(Launcher.class); // we create Logs
 
     public static void main(String[] args)
     {
@@ -26,6 +26,7 @@ public class Launcher
 
         try
         {
+
             List<Event> listEvent = mapper.readValue(Paths.get("src/main/resources/3795220.json").toFile(), new TypeReference<List<Event>>(){});
 
             filtter = new Filtter(listEvent);
@@ -34,11 +35,9 @@ public class Launcher
 
         } catch (IOException exception)
         {
+            LOG.error("ERROR", exception);
             exception.printStackTrace();
         }
-
-
-
 
     }
 }

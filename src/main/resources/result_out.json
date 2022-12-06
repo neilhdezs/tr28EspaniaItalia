@@ -1,0 +1,96 @@
+{
+  "goleador" : [ {
+    "equipo" : "Italy",
+    "nombre" : "Federico Chiesa",
+    "minuto" : 59,
+    "segundo" : 21
+  }, {
+    "equipo" : "Spain",
+    "nombre" : "Álvaro Borja Morata Martín",
+    "minuto" : 79,
+    "segundo" : 38
+  }, {
+    "equipo" : "Italy",
+    "nombre" : "Andrea Belotti",
+    "minuto" : 121,
+    "segundo" : 41
+  }, {
+    "equipo" : "Spain",
+    "nombre" : "Gerard Moreno Balaguero",
+    "minuto" : 122,
+    "segundo" : 23
+  }, {
+    "equipo" : "Italy",
+    "nombre" : "Leonardo Bonucci",
+    "minuto" : 123,
+    "segundo" : 6
+  }, {
+    "equipo" : "Spain",
+    "nombre" : "Thiago Alcântara do Nascimento",
+    "minuto" : 123,
+    "segundo" : 43
+  }, {
+    "equipo" : "Italy",
+    "nombre" : "Federico Bernardeschi",
+    "minuto" : 124,
+    "segundo" : 24
+  }, {
+    "equipo" : "Italy",
+    "nombre" : "Jorge Luiz Frello Filho",
+    "minuto" : 126,
+    "segundo" : 0
+  } ],
+  "referencia" : [ {
+    "equipo" : "Spain",
+    "nombre" : "Aymeric Laporte",
+    "pases" : 125
+  }, {
+    "equipo" : "Italy",
+    "nombre" : "Giorgio Chiellini",
+    "pases" : 43
+  } ],
+  "portero_jugador" : {
+    "equipo" : "Spain",
+    "nombre" : "Unai Simón Mendibil",
+    "pases" : 99
+  },
+  "luchador" : [ {
+    "equipo" : "Spain",
+    "nombre_jugador" : "Aymeric Laporte",
+    "duelos_ganados" : 1
+  }, {
+    "equipo" : "Spain",
+    "nombre_jugador" : "Daniel Olmo Carvajal",
+    "duelos_ganados" : 1
+  }, {
+    "equipo" : "Spain",
+    "nombre_jugador" : "Rodrigo Hernández Cascante",
+    "duelos_ganados" : 1
+  }, {
+    "equipo" : "Spain",
+    "nombre_jugador" : "Jordi Alba Ramos",
+    "duelos_ganados" : 1
+  }, {
+    "equipo" : "Spain",
+    "nombre_jugador" : "Jorge Resurrección Merodio",
+    "duelos_ganados" : 1
+  }, {
+    "equipo" : "Italy",
+    "nombre_jugador" : "Marco Verratti",
+    "duelos_ganados" : 3
+  } ],
+  "porcentajes_posesion" : {
+    "primer_tiempo" : {
+      "spain" : 64.80934219055618,
+      "italy" : 35.19065780944382
+    },
+    "segundo_tiempo" : {
+      "spain" : 68.920511871563,
+      "italy" : 31.07948812843701
+    },
+    "partido_completo" : {
+      "spain" : 66.86492703105958,
+      "italy" : 33.13507296894041
+    }
+  }
+}

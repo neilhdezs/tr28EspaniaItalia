@@ -20,8 +20,14 @@ Configuration:
 
   Loggers:
     logger:
-      - name: es.nhs
-        level: debug
+      - name: ies.jms
+        level: trace
         additivity: false
         AppenderRef:
+          - ref: LogToConsole
           - ref: LogToRollingFile
+
+    Root:
+      level: info
+      AppenderRef:
+        ref: LogToRollingFile

@@ -7,7 +7,6 @@ package es.nhs.models.resultado;
  */
 public class PorcentajePosesion
 {
-
     PrimerTiempo primer_tiempo;
     SegundoTiempo segundo_tiempo;
     PartidoCompleto partido_completo;

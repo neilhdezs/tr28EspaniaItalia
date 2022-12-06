@@ -7,6 +7,7 @@ import es.nhs.models.resultado.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class Filtter
         {
             if (this.eventList.get(i).getShot() != null)
             {
-                if (this.eventList.get(i).getShot().getOutcome().getId() == 97 && this.eventList.get(i+1).getGoalkeeper().getType().getId() == 26)
+                if (this.eventList.get(i).getShot().getOutcome().getName().equals("Goal"))
                 {
 
                     this.resultado.getGoleador().add(new Goleador(
@@ -169,6 +170,20 @@ public class Filtter
                         }
                     }
                 }
+
+                if (this.eventList.get(i).getPosition().getId() == 1)
+                {
+                    if(this.eventList.get(i).getTeam().getName().equals("Spain"))
+                    {
+                        passOfSpainToGoalPeeker++;
+                    }
+
+
+                    if(this.eventList.get(i).getTeam().getName().equals("Italy"))
+                    {
+                        passOfItalyToGoalPeeker++;
+                    }
+                }
             }
         }
 
@@ -206,6 +221,9 @@ public class Filtter
         // String: Jugador que recibe gana el duelo, Integer: Numero de duelos ganados
         Map<String, Integer> numeroDuelosSpain = new HashMap<>();
         Map<String, Integer> numeroDuelosItaly = new HashMap<>();
+        List<Luchador> luchadoresSpain = new ArrayList<>();
+        List<Luchador> luchadoresItaly = new ArrayList<>();
+
         int duelosGanadosSpain = 0;
         int duelosGanadosItaly = 0;
         int duelosTotales = 0;
@@ -250,21 +268,42 @@ public class Filtter
             }
         }
 
-        System.out.println(duelosTotales);
-        System.out.println(duelosGanadosSpain);
-        System.out.println(duelosGanadosItaly);
-
         for (Map.Entry<String, Integer> entry:numeroDuelosSpain.entrySet())
         {
-            System.out.println(entry.getValue() + " -> Puntos " + entry.getKey() + " <- Jugador");
+            if (luchadoresSpain.isEmpty())
+            {
+                luchadoresSpain.add(new Luchador("Spain", entry.getKey(), entry.getValue()));
+            } else {
+                if (luchadoresSpain.get(luchadoresSpain.size()-1).getDuelos_ganados() < entry.getValue())
+                {
+                    luchadoresSpain.clear();
+                    luchadoresSpain.add(new Luchador("Spain", entry.getKey(), entry.getValue()));
+                } else if (luchadoresSpain.get(luchadoresSpain.size() - 1).getDuelos_ganados() == entry.getValue())
+                {
+                    luchadoresSpain.add(new Luchador("Spain", entry.getKey(), entry.getValue()));
+                }
+            }
         }
-
-        System.out.println("\n\nITALY");
 
         for (Map.Entry<String, Integer> entry:numeroDuelosItaly.entrySet())
         {
-            System.out.println(entry.getValue() + " -> Puntos " + entry.getKey() + " <- Jugador");
+            if (luchadoresItaly.isEmpty())
+            {
+                luchadoresItaly.add(new Luchador("Italy", entry.getKey(), entry.getValue()));
+            } else {
+                if (luchadoresItaly.get(luchadoresItaly.size()-1).getDuelos_ganados() < entry.getValue())
+                {
+                    luchadoresItaly.clear();
+                    luchadoresItaly.add(new Luchador("Italy", entry.getKey(), entry.getValue()));
+                } else if (luchadoresItaly.get(luchadoresItaly.size() - 1).getDuelos_ganados() == entry.getValue())
+                {
+                    luchadoresItaly.add(new Luchador("Italy", entry.getKey(), entry.getValue()));
+                }
+            }
         }
+
+        luchadoresSpain.forEach(luchador -> this.resultado.getLuchador().add(luchador));
+        luchadoresItaly.forEach(luchador -> this.resultado.getLuchador().add(luchador));
 
     }
 

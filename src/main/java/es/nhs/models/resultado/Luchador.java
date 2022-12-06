@@ -48,4 +48,14 @@ public class Luchador
     {
         this.duelos_ganados = duelos_ganados;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Luchador{" +
+                "equipo='" + equipo + '\'' +
+                ", nombre_jugador='" + nombre_jugador + '\'' +
+                ", duelos_ganados=" + duelos_ganados +
+                '}';
+    }
 }
