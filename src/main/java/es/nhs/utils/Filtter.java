@@ -47,7 +47,7 @@ public class Filtter
         porteroJugador();
         luchador();
         porcentajePosesion();
-        excribirResultadoJson();
+        escribirResultadoJson();
         System.out.println(this.resultado.toString());
     }
 
@@ -360,7 +360,7 @@ public class Filtter
 
     }
 
-    public void excribirResultadoJson() throws IOException
+    public void escribirResultadoJson() throws IOException
     {
         ObjectWriter writer = Json.mapper().writer(new DefaultPrettyPrinter());
         writer.writeValue(new File("src/main/resources/result_out.json"), this.resultado);

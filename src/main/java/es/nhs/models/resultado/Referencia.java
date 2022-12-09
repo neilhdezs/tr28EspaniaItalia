@@ -53,9 +53,9 @@ public class Referencia
     public String toString()
     {
         return "Referencia{" +
-                "\nequipo='" + equipo + '\'' +
-                "\n, nombre='" + nombre + '\'' +
-                "\n, pases=" + pases +
+                "equipo='" + equipo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", pases=" + pases +
                 '}';
     }
 }

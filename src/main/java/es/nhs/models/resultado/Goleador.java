@@ -65,10 +65,10 @@ public class Goleador
     public String toString()
     {
         return "Goleador{" +
-                "\nequipo='" + equipo + '\'' +
-                "\n, nombre='" + nombre + '\'' +
-                "\n, minuto=" + minuto +
-                "\n, segundo=" + segundo +
+                "equipo='" + equipo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", minuto=" + minuto +
+                ", segundo=" + segundo +
                 '}';
     }
 }

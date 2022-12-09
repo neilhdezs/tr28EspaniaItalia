@@ -79,11 +79,11 @@ public class Resultado
     public String toString()
     {
         return "Resultado{" +
-                "\ngoleador=" + goleador +
-                "\n, referencia=" + referencia +
-                "\n, portero_jugador=" + portero_jugador +
-                "\n, luchador=" + luchador +
-                "\n, porcentajes_posesion=" + porcentajes_posesion +
+                "\n\ngoleador=" + goleador +
+                "\n\nreferencia=" + referencia +
+                "\n\nportero_jugador=" + portero_jugador +
+                "\n\nluchador=" + luchador +
+                "\n\nporcentajes_posesion=" + porcentajes_posesion +
                 '}';
     }
 }
